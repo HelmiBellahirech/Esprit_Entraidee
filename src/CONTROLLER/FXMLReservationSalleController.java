@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAmount;
 import java.time.temporal.TemporalUnit;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,7 +57,8 @@ public class FXMLReservationSalleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        salleCB.getItems().addAll("Salle 1", "Salle 2", "Salle 3");
+        List<Salle> salleList = salleService.getAll();
+        salleCB.getItems().addAll(salleList);
     }
 
     ISalleService salleService = new SalleService();
@@ -74,7 +76,8 @@ public class FXMLReservationSalleController implements Initializable {
 
     @FXML
     private void OnBtnReservClick(ActionEvent event) {
-        Salle salle = salleService.findId(1);
+        Salle salle = (Salle) salleCB.getValue();
+        System.out.println(salle.getId());
         Utilisateur user = esprit_entraide.Esprit_Entraide.getInstance().getLoggedUser();
         int nbPersonnes = Integer.parseInt(nbPersoTxt.getText());
         LocalDateTime dateTime1 = datePK.getValue().atStartOfDay().plusMinutes(fromPK.getValue().getMinute()).plusHours(fromPK.getValue().getHour());
