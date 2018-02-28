@@ -215,7 +215,9 @@ public class FXMLAcceuilUtilisateurController implements Initializable {
             Logger.getLogger(FXMLDetailsCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
         }
         rootpane.getChildren().setAll(pane);
+    }
 
+    @FXML
     private void btn_colocation(ActionEvent event) {
         AnchorPane pane = new AnchorPane();
         try {
