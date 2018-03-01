@@ -46,7 +46,7 @@ public class Colocation_service implements Icolocationservice{
          
            // 
            
-            preparedStatement.setInt(1, t.getId_user());
+            preparedStatement.setInt(1, esprit_entraide.Esprit_Entraide.getInstance().getLoggedUser().getID());
             preparedStatement.setInt(2, t.getNbChambre());
             preparedStatement.setInt(3, t.getNbPersonne());
             preparedStatement.setString(4, t.getType_log());

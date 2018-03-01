@@ -7,10 +7,11 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="rootpane" prefHeight="620.0" prefWidth="1000.0" style="-fx-background-color: #DEDCDC;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER.FXMLUpdateDeleteColocationController">
      <children>
@@ -41,11 +42,19 @@
       <JFXTextField fx:id="nbChambre" layoutX="213.0" layoutY="296.0" />
       <JFXTextField layoutX="556.0" layoutY="171.0" prefHeight="31.0" prefWidth="141.0" text="Ajoutez des photos:" />
       <ImageView fx:id="myimage" fitHeight="140.0" fitWidth="200.0" layoutX="580.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true" />
-      <JFXButton fx:id="idm" layoutX="787.0" layoutY="171.0" onAction="#loadimage" prefHeight="31.0" prefWidth="166.0" style="-fx-background-color: #E21C1C; -fx-background-radius: 20px;" text="télécharger image" />
-      <JFXButton fx:id="retour" layoutX="3.0" layoutY="541.0" onAction="#retour_butt" style="-fx-background-color: #E21C1C;" text="Retour" />
-      <TextField fx:id="photoI" layoutX="1011.0" layoutY="263.0" prefHeight="31.0" prefWidth="56.0" />
-      <JFXButton fx:id="butmodif" layoutX="697.0" layoutY="463.0" onAction="#but_Update" prefHeight="41.0" prefWidth="107.0" style="-fx-background-color: #E21C1C; -fx-background-radius: 20px;" text="Modifier" />
-      <JFXButton fx:id="butremo" layoutX="854.0" layoutY="463.0" onAction="#but_remove" prefHeight="41.0" prefWidth="107.0" style="-fx-background-color: #E21C1C; -fx-background-radius: 20px;" text="Supprimer" />
+      <JFXButton fx:id="idm" layoutX="787.0" layoutY="171.0" onAction="#loadimage" prefHeight="31.0" prefWidth="166.0" style="-fx-background-color: grey;" text="télécharger image" textFill="WHITE" />
+      <JFXButton fx:id="retour" layoutX="3.0" layoutY="541.0" onAction="#retour_butt" style="-fx-background-color: orange;" text="Retour" />
+      <JFXButton fx:id="butmodif" layoutX="697.0" layoutY="463.0" onAction="#but_Update" prefHeight="41.0" prefWidth="107.0" style="-fx-background-color: #E21C1C; -fx-background-radius: 20px;" text="Modifier" textFill="WHITE" />
+      <JFXButton fx:id="butremo" layoutX="854.0" layoutY="463.0" onAction="#but_remove" prefHeight="41.0" prefWidth="107.0" style="-fx-background-color: #E21C1C; -fx-background-radius: 20px;" text="Supprimer" textFill="#fcfcfc" />
+      <Pane layoutX="337.0" layoutY="-1.0" opacity="0.51" prefHeight="31.0" prefWidth="387.0" style="-fx-background-color: #E21C1C; -fx-background-radius: 0px 0px 50px 50px;">
+         <children>
+            <Label layoutX="30.0" layoutY="-2.0" prefHeight="31.0" prefWidth="327.0" text="Modifier/Supprimer Votre Annonce" textFill="WHITE">
+               <font>
+                  <Font name="Andalus" size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
        
    </children>
 </AnchorPane>

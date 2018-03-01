@@ -274,7 +274,7 @@ public class FXMLChercherAllController implements Initializable {
             public ListCell<Colocation> call(ListView<Colocation> p) {
                  
                 ListCell<Colocation> cell = new ListCell<Colocation>(){
- 
+                    
                     @Override
                     protected void updateItem(Colocation t, boolean bln) {
                         super.updateItem(t, bln);

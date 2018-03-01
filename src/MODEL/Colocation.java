@@ -55,6 +55,19 @@ public class Colocation {
          this.titre = titre;
         this.photo = photo;
     }
+     public Colocation( int nbChambre, int nbPersonne, String type_log, String adresse, String etage,Date date_dispo, String meuble, float prix , String titre) {
+        
+        this.nbChambre = nbChambre;
+        this.nbPersonne = nbPersonne;
+        this.type_log = type_log;
+        this.adresse = adresse;
+        this.etage = etage;
+        this.date_dispo = date_dispo;
+        this.meuble = meuble;
+        this.prix = prix;
+         this.titre = titre;
+        
+    }
       public Colocation( int nbChambre, int nbPersonne, String type_log) {
         
         this.nbChambre = nbChambre;

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER.FXMLReservationSalleController">
+   <children>
+      <ImageView fitHeight="556.0" fitWidth="740.0" layoutX="75.0" layoutY="60.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="60.0">
+         <image>
+            <Image url="@../reserver_salle_bg.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="284.0" layoutY="17.0" prefHeight="51.0" prefWidth="269.0" text=" Réserver Ici..." AnchorPane.topAnchor="20.0">
+         <font>
+            <Font name="Calisto MT" size="39.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#b94040" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <VBox layoutX="237.0" layoutY="116.0" prefHeight="352.0" prefWidth="294.0" spacing="20.0" style="-fx-background-color: rgb(255, 255, 255, 0.5);" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="140.0">
+         <children>
+            <ComboBox fx:id="salleCB" prefHeight="36.0" prefWidth="284.0" promptText="Choisir une salle" />
+            <DatePicker fx:id="datePK" prefHeight="40.0" prefWidth="300.0" promptText="Sélectionner la date " />
+            <HBox spacing="20.0">
+               <children>
+                  <JFXTimePicker fx:id="fromPK" prefHeight="25.0" prefWidth="100.0" promptText="From">
+                     <defaultColor>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="BLACK" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </defaultColor>
+                  </JFXTimePicker>
+                  <JFXTimePicker fx:id="toPK" prefHeight="25.0" prefWidth="100.0" promptText="To">
+                     <defaultColor>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="BLACK" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </defaultColor>
+                  </JFXTimePicker>
+               </children>
+            </HBox>
+            <TextField fx:id="nbPersoTxt" prefHeight="40.0" prefWidth="284.0" promptText="Nombre personnes" />
+            <JFXButton fx:id="reservBtn" onAction="#OnBtnReservClick" prefHeight="36.0" prefWidth="166.0" style="-fx-background-color: #E21C1C; -fx-background-radius: 50px;" text="Réserver" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <Label fx:id="infoLbl" prefHeight="70.0" prefWidth="284.0" style="-fx-background-color: white;" text="Info label" textFill="#bf2a2a" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <Pane layoutX="-6.0" layoutY="-3.0" prefHeight="635.0" prefWidth="83.0" style="-fx-background-color: #E21C1C; -fx-background-radius: 50px 0px;" />
+      <JFXButton fx:id="Retour" layoutX="51.0" layoutY="24.0" onAction="#On_btn_Menu" prefHeight="37.0" prefWidth="149.0" style="-fx-background-color: #E21C1C; -fx-background-radius: 50px;" text="Menu Principale" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

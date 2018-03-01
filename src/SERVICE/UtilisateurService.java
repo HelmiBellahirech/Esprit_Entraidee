@@ -12,7 +12,6 @@ import MODEL.Professeur;
 import MODEL.Responsable;
 import MODEL.Utilisateur;
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -98,7 +97,7 @@ public class UtilisateurService implements IutilisateurService {
             }
         } else if (t instanceof Responsable) {
             Responsable r = (Responsable) t;
-            String req = "insert into Utilisateur (Email,Username,Password,Nom,Prenom,Telephone,Photo,Sexe,Date_Creation,Role,Nom_Club,Photo_Club) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+            String req = "insert into Utilisateur (Email,Username,Password,Nom,Prenom,Telephone,Photo,Sexe,Date_Creation,Role) values (?,?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement preparedStatement;
 
@@ -120,8 +119,7 @@ public class UtilisateurService implements IutilisateurService {
                 preparedStatement.setString(8, r.getSexe());
                 preparedStatement.setDate(9, date_sql);
                 preparedStatement.setString(10, "Responsable");
-                preparedStatement.setString(11, r.getNom_Club());
-                preparedStatement.setString(12, r.getPhoto_Club());
+                
 
                 return preparedStatement.executeUpdate() > 0;
             } catch (SQLException ex) {
@@ -134,44 +132,13 @@ public class UtilisateurService implements IutilisateurService {
 
     @Override
     public boolean update(Utilisateur t) {
-        if (t instanceof Etudiant) {
-            Etudiant e = (Etudiant) t;
-            String req = "update utilisateur set  Email=?,Username=?,Password=?,Nom=?,Prenom=?,Telephone=?,Photo=?,Sexe=?,Role=?,Classe=?,ID_CLUB=?,BLOCK=? where ID = ?";
-            PreparedStatement preparedStatement;
-            java.util.Date date_util = new java.util.Date();
-//Tu fais tes traitement sur date_util...
-
-//Tu castes à la fin pour insérer en base.
-            java.sql.Date date_sql = new java.sql.Date(date_util.getTime());
-            try {
-                preparedStatement = connection.prepareStatement(req);
-
-                preparedStatement.setString(1, e.getEmail());
-                preparedStatement.setString(2, e.getUsername());
-                preparedStatement.setString(3, e.getPassword());
-                preparedStatement.setString(4, e.getNom());
-                preparedStatement.setString(5, e.getPrenom());
-                preparedStatement.setString(6, e.getTelephone());
-                preparedStatement.setString(7, e.getPhoto());
-                preparedStatement.setString(8, e.getSexe());
-                preparedStatement.setString(9, "Etudiant");
-                preparedStatement.setString(10, e.getClasse());
-                preparedStatement.setInt(11, e.getID_CLUB());
-                preparedStatement.setBoolean(12, e.isBlock());
-                preparedStatement.setInt(13, e.getID());
-                return preparedStatement.executeUpdate() > 0;
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                return false;
-            }
-        }
-        if (t instanceof Responsable) {
+     
+        
             Responsable e = (Responsable) t;
-            String req = "update utilisateur set  Email=?,Username=?,Password=?,Nom=?,Prenom=?,Telephone=?,Photo=?,Sexe=?,Role=?,Nom_Club=?,Photo_Club=?,ID_CLUB=?,BLOCK=? where ID = ?";
+            String req = "update utilisateur set  Email=?,Username=?,Password=?,Nom=?,Prenom=?,Telephone=?,Photo=?,Sexe=?,Role=? where ID = ?";
             PreparedStatement preparedStatement;
             java.util.Date date_util = new java.util.Date();
 //Tu fais tes traitement sur date_util...
-
 //Tu castes à la fin pour insérer en base.
             java.sql.Date date_sql = new java.sql.Date(date_util.getTime());
             try {
@@ -186,49 +153,15 @@ public class UtilisateurService implements IutilisateurService {
                 preparedStatement.setString(7, e.getPhoto());
                 preparedStatement.setString(8, e.getSexe());
                 preparedStatement.setString(9, "Responsable");
-                preparedStatement.setString(10, e.getNom_Club());
-                preparedStatement.setString(11, e.getPhoto_Club());
-                preparedStatement.setInt(12, e.getID_CLUB());
-                preparedStatement.setBoolean(13, e.isBlock());
-                preparedStatement.setInt(14, e.getID());
+                
+                preparedStatement.setInt(10, e.getID());
                 return preparedStatement.executeUpdate() > 0;
             } catch (SQLException ex) {
                 ex.printStackTrace();
                 return false;
             }
-        }
-        if (t instanceof Professeur) {
-            Professeur e = (Professeur) t;
-            String req = "update utilisateur set  Email=?,Username=?,Password=?,Nom=?,Prenom=?,Telephone=?,Photo=?,Sexe=?,Role=?,Specialite=?,BLOCK=? where ID = ?";
-            PreparedStatement preparedStatement;
-            java.util.Date date_util = new java.util.Date();
-//Tu fais tes traitement sur date_util...
-
-//Tu castes à la fin pour insérer en base.
-            java.sql.Date date_sql = new java.sql.Date(date_util.getTime());
-            try {
-                preparedStatement = connection.prepareStatement(req);
-
-                preparedStatement.setString(1, e.getEmail());
-                preparedStatement.setString(2, e.getUsername());
-                preparedStatement.setString(3, e.getPassword());
-                preparedStatement.setString(4, e.getNom());
-                preparedStatement.setString(5, e.getPrenom());
-                preparedStatement.setString(6, e.getTelephone());
-                preparedStatement.setString(7, e.getPhoto());
-                preparedStatement.setString(8, e.getSexe());
-                preparedStatement.setString(10, "Professeur");
-                preparedStatement.setString(11, e.getSpecialite());
-                preparedStatement.setBoolean(12, e.isBlock());
-                preparedStatement.setInt(13, e.getID());
-
-                return preparedStatement.executeUpdate() > 0;
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                return false;
-            }
-        }
-        return false;
+        
+        
     }
 
     @Override
@@ -308,7 +241,7 @@ public class UtilisateurService implements IutilisateurService {
                         e.setSexe(rs.getString("Sexe"));
                         e.setDate_Creation(rs.getDate("Date_Creation"));
                         e.setRole(rs.getString("Role"));
-                        e.setBlock(rs.getBoolean("BLOCK"));
+                        
                         e.setID_CLUB(rs.getInt("ID_ClUB"));
                         e.setClasse(rs.getString("Classe"));
                         esprit_entraide.Esprit_Entraide.getInstance().setLoggedUser(e);
@@ -327,10 +260,7 @@ public class UtilisateurService implements IutilisateurService {
                         e.setSexe(rs.getString("Sexe"));
                         e.setDate_Creation(rs.getDate("Date_Creation"));
                         e.setRole(rs.getString("Role"));
-                        e.setBlock(rs.getBoolean("BLOCK"));
-                        e.setID_CLUB(rs.getInt("ID_ClUB"));
-                        e.setNom_Club(rs.getString("Nom_Club"));
-                        e.setPhoto_Club(rs.getString("Photo_Club"));
+                        
 
                         esprit_entraide.Esprit_Entraide.getInstance().setLoggedUser(e);
                         System.out.println(e);
@@ -348,7 +278,7 @@ public class UtilisateurService implements IutilisateurService {
                         e.setSexe(rs.getString("Sexe"));
                         e.setDate_Creation(rs.getDate("Date_Creation"));
                         e.setRole(rs.getString("Role"));
-                        e.setBlock(rs.getBoolean("BLOCK"));
+                        
                         //  e.setID_CLUB(rs.getInt("ID_ClUB"));
                         e.setSpecialite(rs.getString("Specialite"));
                         esprit_entraide.Esprit_Entraide.getInstance().setLoggedUser(e);
@@ -378,7 +308,7 @@ public class UtilisateurService implements IutilisateurService {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                u = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getBoolean(12));
+                u = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
                 u.setRole(rs.getString("Role"));
                 u.setID(rs.getInt("ID"));
             }
@@ -398,7 +328,7 @@ public class UtilisateurService implements IutilisateurService {
             ps.setString(1, num);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                u = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getBoolean(12));
+                u = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
                 u.setRole(rs.getString("Role"));
                 u.setID(rs.getInt("ID"));
             }
@@ -476,7 +406,7 @@ public class UtilisateurService implements IutilisateurService {
             preparedStatement.setString(1, Matricule);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                utilisateur = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getBoolean(12));
+                utilisateur = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

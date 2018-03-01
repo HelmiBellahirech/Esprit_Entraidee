@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,31 +22,38 @@ import java.util.List;
  * @author OrbitG
  */
 public class CoursService implements ICoursService {
-
+    
     Connection connection;
-
+    
     public CoursService() {
         connection = DataSource.getInstance().getConnection();
     }
-
+    
     @Override
     public boolean add(Cours t) {
         String req = "insert into cours (id_prof, module, matiere, date_pub, fichier) values (?,?,?,?,?)";
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = connection.prepareStatement(req);
+            preparedStatement = connection.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, t.getProf().getID());
             preparedStatement.setString(2, t.getModule());
             preparedStatement.setString(3, t.getMatiere());
             preparedStatement.setDate(4, new java.sql.Date(t.getDate_pub().getTime()));
             preparedStatement.setBlob(5, t.getFichier());
-            return preparedStatement.executeUpdate() > 0;
+            boolean isInserted = preparedStatement.executeUpdate() > 0;
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                int last_inserted_id = rs.getInt(1);
+                System.out.println(last_inserted_id);
+                t.setId(last_inserted_id);
+            }
+            return isInserted;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
     }
-
+    
     @Override
     public boolean update(Cours t) {
         String req = "UPDATE cours SET  module=?, matiere=?, date_pub=?, fichier=? WHERE ID = ?";
@@ -63,7 +71,7 @@ public class CoursService implements ICoursService {
             return false;
         }
     }
-
+    
     @Override
     public boolean remove(Integer r) {
         String req = "DELETE FROM cours WHERE ID=?";
@@ -77,7 +85,7 @@ public class CoursService implements ICoursService {
             return false;
         }
     }
-
+    
     @Override
     public Cours findId(Integer r) {
         Cours cours = null;

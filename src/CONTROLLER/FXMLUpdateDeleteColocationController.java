@@ -31,6 +31,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,6 +42,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -80,7 +82,6 @@ public class FXMLUpdateDeleteColocationController implements Initializable {
     private JFXButton idm;
     @FXML
     private JFXButton retour;
-    @FXML
     private TextField photoI;
     @FXML
     private JFXButton butmodif;
@@ -107,6 +108,7 @@ public class FXMLUpdateDeleteColocationController implements Initializable {
         type_log.setItems(typelogoption);
         Colocation c = new Colocation_service().findId(id);
         adresse.setText(c.getAdresse());
+        titre.setText(c.getTitre());
         nbPersonne.setText(String.valueOf(c.getNbPersonne()));
         nbChambre.setText(String.valueOf(c.getNbChambre()));
         prix.setText(String.valueOf(c.getPrix()));
@@ -121,6 +123,12 @@ public class FXMLUpdateDeleteColocationController implements Initializable {
         } else if (c.getMeuble().equals("Non")) {
             tog.selectToggle(meuble2);
         }
+     nbPersonne.addEventFilter(KeyEvent.KEY_TYPED , numeric_Validation(10));
+      adresse.addEventFilter(KeyEvent.KEY_TYPED , letter_Validation(50));
+      nbChambre.addEventFilter(KeyEvent.KEY_TYPED , numeric_Validation(10));
+      titre.addEventFilter(KeyEvent.KEY_TYPED , letter_Validation(50));
+      prix.addEventFilter(KeyEvent.KEY_TYPED , numeric_Validation(10));
+   
            
     }    
   public void redirect(String id) {
@@ -187,12 +195,12 @@ public class FXMLUpdateDeleteColocationController implements Initializable {
             Meuble1 = meuble2.getText();
         }
         String Titre = titre.getText();
-        String Photo = photoI.getText();
+      //  String Photo = photoI.getText();
         String Prix1 = prix.getText();
         java.util.Date date_util = new java.util.Date();
         java.sql.Date date_sql = new java.sql.Date(date_util.getTime());
         
-      if ((!"".equals(Titre)) && (!"".equals(Etage1))  && (!"".equals(Adresse1)) && (!"".equals(NbChambre1)) && (!"".equals(NbChambre1))&& (!"".equals(Photo))&& (!"".equals(Prix1))&& (!"".equals(Type_log1))) {
+      if ((!"".equals(Titre)) && (!"".equals(Etage1))  && (!"".equals(Adresse1)) && (!"".equals(NbChambre1)) && (!"".equals(NbChambre1))&& (!"".equals(Prix1))&& (!"".equals(Type_log1))) {
              if (date.compareTo(date_sql) < 0) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Echec de la modification");
@@ -201,7 +209,7 @@ public class FXMLUpdateDeleteColocationController implements Initializable {
                 alert.showAndWait();
                 }  else{
 
-                Colocation c= new Colocation(id,Integer.parseInt(NbChambre1),Integer.parseInt(NbPersonne1),Type_log1,Adresse1,Etage1,date,Meuble1,Float.parseFloat(Prix1),Titre,Photo) ;  
+               Colocation c= new Colocation(Integer.parseInt(NbChambre1),Integer.parseInt(NbPersonne1),Type_log1,Adresse1,Etage1,date,Meuble1,Float.parseFloat(Prix1),Titre) ; 
                 Colocation_service ser = new Colocation_service() ; 
                 ser.update(c);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -224,6 +232,45 @@ public class FXMLUpdateDeleteColocationController implements Initializable {
    
        
     }
+     /*limitter la validation des nombres :maxLengh et  seulement des nombres *************************************/
+    public EventHandler<KeyEvent> numeric_Validation(final Integer max_Lengh) {
+    return new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent e) {
+            TextField txt_TextField = (TextField) e.getSource();                
+            if (txt_TextField.getText().length() >= max_Lengh) {                    
+                e.consume();
+            }
+            if(e.getCharacter().matches("[0-9.]")){ 
+                if(txt_TextField.getText().contains(CharSequence.class.cast(".")) && e.getCharacter().matches("[.]")){
+                    e.consume();
+                }else if(txt_TextField.getText().length() == 0 && e.getCharacter().matches("[.]")){
+                    e.consume(); 
+                }
+            }else{
+                e.consume();
+            }
+        }
+    };
+}    
+
+
+ /*limitter la validation des lettres :maxLengh et  seulement des Letters de  Validation *************************************/
+        public EventHandler<KeyEvent> letter_Validation(final Integer max_Lengh) {
+            return new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent e) {
+            TextField txt_TextField = (TextField) e.getSource();                
+            if (txt_TextField.getText().length() >= max_Lengh) {                    
+                e.consume();
+            }
+            if(e.getCharacter().matches("[A-Z a-z]")){ 
+            }else{
+                e.consume();
+            }
+        }
+    };
+        }
 
     @FXML
     private void but_remove(ActionEvent event) {

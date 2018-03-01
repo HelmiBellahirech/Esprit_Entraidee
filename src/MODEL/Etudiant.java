@@ -14,7 +14,8 @@ import java.sql.Date;
 public class Etudiant extends Utilisateur{
 
     private String Classe;
-
+    private int ID_CLUB;
+    
     
 
     
@@ -26,37 +27,57 @@ public class Etudiant extends Utilisateur{
         this.Classe = Classe;
     }
 
-    public Etudiant(String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Sexe, String Classe,String Matricule,  Boolean Block) {
-        super(Email, username, Password, Nom, Prenom, Telephone, Sexe, Matricule, Block);
-        this.Classe = Classe;
+    public int getID_CLUB() {
+        return ID_CLUB;
     }
 
-    public Etudiant( int ID, String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Photo, String Sexe, String Matricule, String Classe,String Role, Boolean Block) {
-        super(ID, Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Matricule, Role, Block);
-        this.Classe = Classe;
+    public void setID_CLUB(int ID_CLUB) {
+        this.ID_CLUB = ID_CLUB;
     }
 
-    public Etudiant(String Classe) {
+    public Etudiant( String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Sexe, String Classe,String Matricule, int ID_CLUB) {
+        super(Email, username, Password, Nom, Prenom, Telephone, Sexe, Matricule);
         this.Classe = Classe;
+        this.ID_CLUB = ID_CLUB;
     }
 
-    public Etudiant( String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Photo, String Sexe, String Classe,String Matricule, Boolean Block) {
-        super(Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Matricule, Block);
+    public Etudiant( String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Sexe,String Classe, int ID_CLUB) {
+        super(Email, username, Password, Nom, Prenom, Telephone, Sexe);
         this.Classe = Classe;
+        this.ID_CLUB = ID_CLUB;
     }
 
-    public Etudiant( int ID, String Email, String username, String Password, String Nom, String Prenom,
-            String Telephone, String Photo, String Sexe, Date Date_Creation, String Classe,String Matricule,
-            String Role, int ID_CLUB, Boolean Block) {
-        super(ID, Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Date_Creation, Matricule, Role, ID_CLUB, Block);
+    public Etudiant( int ID, String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Photo, String Sexe, String Matricule, String Role,String Classe, int ID_CLUB) {
+        super(ID, Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Matricule, Role);
         this.Classe = Classe;
+        this.ID_CLUB = ID_CLUB;
+    }
+    
+
+    public Etudiant(String Classe, int ID_CLUB) {
+        this.Classe = Classe;
+        this.ID_CLUB = ID_CLUB;
     }
 
-    public Etudiant( String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Photo, String Sexe,String Classe, int ID_CLUB, Boolean Block) {
-        super(Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, ID_CLUB, Block);
+    public Etudiant( String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Photo, String Sexe, String Matricule,String Classe, int ID_CLUB) {
+        super(Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Matricule);
         this.Classe = Classe;
+        this.ID_CLUB = ID_CLUB;
     }
 
+    public Etudiant( int ID, String Email, String username, String Telephone, String Photo,String Classe, int ID_CLUB) {
+        super(ID, Email, username, Telephone, Photo);
+        this.Classe = Classe;
+        this.ID_CLUB = ID_CLUB;
+    }
+
+    public Etudiant(int ID, String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Photo, String Sexe, Date Date_Creation, String Matricule, String Role,String Classe, int ID_CLUB) {
+        super(ID, Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Date_Creation, Matricule, Role);
+        this.Classe = Classe;
+        this.ID_CLUB = ID_CLUB;
+    }
+
+   
     public Etudiant() {
     }
 

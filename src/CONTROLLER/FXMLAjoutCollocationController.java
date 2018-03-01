@@ -8,6 +8,7 @@ package CONTROLLER;
 import MODEL.Colocation;
 import SERVICE.Colocation_service;
 import UTILS.InputValidation;
+import UTILS.Utils;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -40,6 +41,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
@@ -60,6 +62,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 /**
@@ -104,8 +107,14 @@ public class FXMLAjoutCollocationController implements Initializable{
      private JFXTextField photo;
     @FXML
     private JFXButton retour;
-    @FXML
     private TextField photoI;
+     private File file = null;
+
+    private Image imagelog;
+    private FileChooser fileChooser = new FileChooser();
+    private static String uuid;
+    final Stage stage = new Stage();
+    
     
 
 
@@ -200,11 +209,11 @@ public class FXMLAjoutCollocationController implements Initializable{
         }
         
         String Titre = titre.getText();
-        String Photo = photoI.getText();
+      //  String Photo = photoI.getText();
         java.util.Date date_util = new java.util.Date();
         java.sql.Date date_sql = new java.sql.Date(date_util.getTime());
         
-      if ((!"".equals(Titre)) && (!"".equals(Etage))  && (!"".equals(Adresse)) && (!"".equals(NbChambre)) && (!"".equals(NbPersonne))&& (!"".equals(Photo))&& (!"".equals(Prix))&& (!"".equals(Type_log))) {
+      if ((!"".equals(Titre)) && (!"".equals(Etage))  && (!"".equals(Adresse)) && (!"".equals(NbChambre)) && (!"".equals(NbPersonne))&& (!"".equals(Prix))&& (!"".equals(Type_log))) {
              if (date.compareTo(date_sql) < 0) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Echec de l'ajout");
@@ -214,8 +223,9 @@ public class FXMLAjoutCollocationController implements Initializable{
                 } 
              else{
 
-        Colocation c= new Colocation(Integer.parseInt(NbChambre),Integer.parseInt(NbPersonne),Type_log,Adresse,Etage,date,Meuble,Float.parseFloat(Prix),Titre,Photo) ; 
-        Colocation_service ser = new Colocation_service() ; 
+        Colocation c= new Colocation(Integer.parseInt(NbChambre),Integer.parseInt(NbPersonne),Type_log,Adresse,Etage,date,Meuble,Float.parseFloat(Prix),Titre) ; 
+        Colocation_service ser = new Colocation_service() ;
+       c.setPhoto(uuid);
         ser.add(c);
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Ajout Annonce");
@@ -247,31 +257,21 @@ public class FXMLAjoutCollocationController implements Initializable{
     
     
     @FXML
-    private void loadimage(ActionEvent event) {
-         FileChooser fileChooser = new FileChooser();
-         //Show open file dialog
-         File file = fileChooser.showOpenDialog(null);
-             if (file != null) {
-            //Set extension filter
-            FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-            photoI.setText(file.  getName());
-            System.out.println(file.getName()); 
-            
-           
-                       
-            try {
-                BufferedImage bufferedImage = ImageIO.read(file);
-                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-               myimage.setImage(image);
-            } catch (IOException ex) {
-                Logger.getLogger(Esprit_Entraide.class.getName()).log(Level.SEVERE, null, ex);
-            }}
-             else {
-             photoI.setText("File selection cancelled."); }
+    private void loadimage(ActionEvent event) throws IOException {
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            uuid = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
+            imagelog = new Image(file.toURI().toString());
+            myimage.setImage(imagelog);
+            //   Copy c = new Copy();
+            //C:\\wamp\\www\\images\\utilisateur\\
+            Utils u = new Utils();
+            String emplacement = "C:\\wamp64\\www\\pi\\" + uuid;
+            System.out.println(emplacement);
+            u.CopyImage(emplacement, file.toPath().toString());
+            System.out.println("rrrrr");
     }
-    
+    }
 
 
     @FXML

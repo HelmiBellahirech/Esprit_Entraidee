@@ -7,8 +7,12 @@ package CONTROLLER;
 
 import MODEL.Colocation;
 import MODEL.Covoiturage;
+import MODEL.Etudiant;
+import MODEL.Utilisateur;
 import SERVICE.Colocation_service;
 import SERVICE.Covoiturage_service;
+import SERVICE.EtudiantService;
+import SERVICE.UtilisateurService;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.lynden.gmapsfx.GoogleMapView;
@@ -83,6 +87,8 @@ public class FXMLInfoCollocationController implements Initializable, MapComponen
     protected StringProperty to = new SimpleStringProperty();
     @FXML
     private JFXButton Aff;
+    @FXML
+    private Label numtel;
 
 
     /**
@@ -102,6 +108,10 @@ public class FXMLInfoCollocationController implements Initializable, MapComponen
         
         mapView.addMapInializedListener(this);
         to.bindBidirectional(adresse.textProperty());
+        EtudiantService us = new EtudiantService();
+        
+        Etudiant u = us.findId(col.getId_user()) ; 
+        numtel.setText(u.getTelephone()) ; 
         
     }    
       public void redirect(String id){

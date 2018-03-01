@@ -7,6 +7,8 @@ package MODEL;
 
 import java.sql.Blob;
 import java.util.Date;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -16,7 +18,7 @@ import javafx.beans.property.StringProperty;
  */
 public class Cours {
 
-    private int id;
+    private SimpleIntegerProperty id;
     private Professeur prof;
     private SimpleStringProperty module;
     private SimpleStringProperty matiere;
@@ -25,7 +27,7 @@ public class Cours {
 
     public Cours(int id, Professeur prof, String module, String matiere, Date date_pub, Blob fichier) {
         this(prof, module, matiere, date_pub, fichier);
-        this.id = id;
+        this.id = new SimpleIntegerProperty(id);
     }
 
     public Cours(Professeur prof, String module, String matiere, Date date_pub, Blob fichier) {
@@ -34,6 +36,7 @@ public class Cours {
         this.matiere = new SimpleStringProperty(matiere);
         this.date_pub = date_pub;
         this.fichier = fichier;
+        this.id = new SimpleIntegerProperty();
     }
 
     public Cours(int aInt) {
@@ -41,7 +44,7 @@ public class Cours {
     }
 
     public int getId() {
-        return id;
+        return id.get();
     }
 
     public String getModule() {
@@ -61,7 +64,7 @@ public class Cours {
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id.set(id);
     }
 
     public void setModule(String module) {
@@ -74,6 +77,10 @@ public class Cours {
 
     public StringProperty matiereProperty() {
         return this.matiere;
+    }
+
+    public IntegerProperty idProperty() {
+        return this.id;
     }
 
     public void setMatiere(String matiere) {
@@ -95,5 +102,4 @@ public class Cours {
     public void setProf(Professeur prof) {
         this.prof = prof;
     }
-
 }

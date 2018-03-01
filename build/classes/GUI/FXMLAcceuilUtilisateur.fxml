@@ -185,7 +185,7 @@
                   </JFXButton>
                   <ImageView fitHeight="33.0" fitWidth="43.0" layoutX="101.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@gdfgnh.png" />
+                        <Image url="@NaturopathicMedi.png" />
                      </image>
                   </ImageView>
                </children>

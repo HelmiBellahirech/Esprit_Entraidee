@@ -7,16 +7,13 @@ package CONTROLLER;
 
 import MODEL.Covoiturage;
 import MODEL.Reservationcov;
-import MODEL.Reservationcov;
 import MODEL.Utilisateur;
 import SERVICE.Covoiturage_service;
 import SERVICE.ReservationcovService;
 import SERVICE.UtilisateurService;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-
 import com.jfoenix.controls.JFXListView;
-import com.sun.javafx.scene.control.skin.LabeledText;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -25,7 +22,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -46,7 +42,6 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -148,6 +143,10 @@ public class FXMLMesReservationCovController implements Initializable {
                                     alert.showAndWait();
 
                                     if (alert.getResult() == ButtonType.YES) {
+                                        Covoiturage_service cs = new Covoiturage_service();
+                                        Covoiturage c = cs.findId(cov.getID_ANNONCE());
+                                        c.setNbrPlaces(c.getNbrPlaces()+cov.getNBPLACES());
+                                        cs.update(c);
                                         rss.remove(cov.getID());
                                         AnchorPane pane = new AnchorPane();
                                         try {

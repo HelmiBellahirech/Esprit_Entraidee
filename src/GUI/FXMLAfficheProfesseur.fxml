@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" fx:id="rootpane" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER.FXMLAfficheProfesseurController">
+   <children>
+      <JFXListView fx:id="List" layoutY="62.0" prefHeight="338.0" prefWidth="500.0" stylesheets="@../CSS/StyleSheet.css" />
+      <JFXButton fx:id="AJout" layoutX="78.0" layoutY="25.0" onAction="#On_btn_Ajout" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #E21C1C; -fx-background-radius: 50px;" text="Ajouter Professeur" textFill="WHITE" />
+      <JFXButton layoutX="282.0" layoutY="25.0" onAction="#On_btn_aficher" prefHeight="25.0" prefWidth="171.0" style="-fx-background-color: #E21C1C; -fx-background-radius: 50;" text="Afficher Liste Professeur" textFill="WHITE" />
+      <Pane fx:id="paneAjout" layoutY="62.0" prefHeight="338.0" prefWidth="500.0">
+         <children>
+            <Label layoutX="61.0" layoutY="35.0" text="Nom" />
+            <Label layoutX="45.0" layoutY="84.0" text="Prénom" />
+            <Label layoutX="29.0" layoutY="124.0" prefHeight="17.0" prefWidth="73.0" text="Mot de Passe" />
+            <Label layoutX="283.0" layoutY="35.0" text="Email" />
+            <Label layoutX="122.0" layoutY="244.0" text="Téléphone" />
+            <Label layoutX="259.0" layoutY="84.0" text="Specialité" />
+            <Label layoutX="263.0" layoutY="129.0" text="Username" />
+            <JFXTextField fx:id="NomInput" focusColor="#e21c1c" layoutX="115.0" layoutY="23.0" />
+            <JFXTextField fx:id="PrenomInput" focusColor="#e21c1c" layoutX="103.0" layoutY="72.0" />
+            <JFXPasswordField fx:id="MdpInput" focusColor="#e21c1c" layoutX="103.0" layoutY="115.0" />
+            <JFXPasswordField fx:id="ValidMdpInput" focusColor="#e21c1c" layoutX="150.0" layoutY="169.0" />
+            <JFXTextField fx:id="TelInput" focusColor="#e21c1c" layoutX="203.0" layoutY="232.0" />
+            <JFXTextField fx:id="EmailInput" focusColor="#e21c1c" layoutX="329.0" layoutY="18.0" />
+            <JFXTextField fx:id="SpecialiteInput" focusColor="#e21c1c" layoutX="338.0" layoutY="72.0" />
+            <JFXTextField fx:id="UsernameInput" focusColor="#e21c1c" layoutX="338.0" layoutY="115.0" />
+            <JFXComboBox fx:id="SexeCombo" focusColor="#e21c1c" layoutX="353.0" layoutY="169.0" prefHeight="25.0" prefWidth="105.0" />
+            <JFXButton layoutX="405.0" layoutY="288.0" onAction="#On_btn_ConfirmerAjout" prefHeight="25.0" prefWidth="73.0" style="-fx-background-color: #E21C1C; -fx-background-radius: 50px;" text="Confirmer" textFill="WHITE" />
+            <Label layoutX="305.0" layoutY="181.0" text="Sexe" />
+            <Label layoutX="10.0" layoutY="181.0" text="Confirmez mot de passe" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

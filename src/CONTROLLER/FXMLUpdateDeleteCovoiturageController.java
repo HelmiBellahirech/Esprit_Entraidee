@@ -98,14 +98,11 @@ public class FXMLUpdateDeleteCovoiturageController implements Initializable {
         } else if (c.getFumeur().equals("Non")) {
             fumeur.selectToggle(non);
         }
-        
-       
-        
+
     }
-    
 
     public void redirect(String id) {
-        System.out.println("Interface Affiche Mod/supp ");
+
         System.out.println(id);
         this.id = Integer.parseInt(id);
 
@@ -123,7 +120,7 @@ public class FXMLUpdateDeleteCovoiturageController implements Initializable {
         } else {
             date = null;
         }
-         System.out.println(date);
+        System.out.println(date);
         String heure;
 
         if (heureInput.getValue() != null) {
@@ -183,33 +180,33 @@ public class FXMLUpdateDeleteCovoiturageController implements Initializable {
     @FXML
     private void On_btn_Supprimer(ActionEvent event) {
         Covoiturage_service cs = new Covoiturage_service();
-        
-        Alert alert = new Alert(AlertType.CONFIRMATION, "Etes vous sur de vouloir supprimer " + " ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Etes vous sur de vouloir supprimer " + " ?", ButtonType.YES, ButtonType.CANCEL);
         alert.showAndWait();
 
-if (alert.getResult() == ButtonType.YES) {
-    cs.remove(id);
-       AnchorPane pane = new AnchorPane();
-                try {
-                    pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLMesCovoiturage.fxml"));
-                } catch (IOException ex) {
-                    Logger.getLogger(FXMLUpdateDeleteCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                rootpane.getChildren().setAll(pane);
-}
-     
+        if (alert.getResult() == ButtonType.YES) {
+            cs.remove(id);
+            AnchorPane pane = new AnchorPane();
+            try {
+                pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLMesCovoiturage.fxml"));
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLUpdateDeleteCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            rootpane.getChildren().setAll(pane);
+        }
+
     }
 
     @FXML
     private void On_btn_Annuler(ActionEvent event) {
-          AnchorPane pane = new AnchorPane();
-                try {
-                    pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLMesCovoiturage.fxml"));
-                } catch (IOException ex) {
-                    Logger.getLogger(FXMLUpdateDeleteCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                rootpane.getChildren().setAll(pane);
-        
+        AnchorPane pane = new AnchorPane();
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLMesCovoiturage.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLUpdateDeleteCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        rootpane.getChildren().setAll(pane);
+
     }
 
 }
