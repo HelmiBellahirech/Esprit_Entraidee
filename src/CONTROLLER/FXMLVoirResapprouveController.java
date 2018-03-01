@@ -13,18 +13,14 @@ import SERVICE.ReservationcovService;
 import SERVICE.UtilisateurService;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXTextField;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,7 +36,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -82,11 +77,10 @@ public class FXMLVoirResapprouveController implements Initializable {
                     if (e != null) {
                         Covoiturage c = cs.findId(e.getID_ANNONCE());
                         Utilisateur U = new Utilisateur();
-                         U = us.getById(e.getID_RESERVE());
-                       
-                        
+                        U = us.getById(e.getID_RESERVE());
+
                         //    File file = new File(ps.findById(e.getPassager().getId()).getAvatar());
-                        File file = new File("C:\\xampp\\htdocs\\pi\\"+U.getPhoto());
+                        File file = new File("C:\\xampp\\htdocs\\pi\\" + U.getPhoto());
                         Image IMAGE_RUBY = new Image(file.toURI().toString());
                         //   Image IMAGE_RUBY = new Image(ps.findById(e.getPassager().getId()).getAvatar());
 
@@ -127,7 +121,7 @@ public class FXMLVoirResapprouveController implements Initializable {
                             }
 
                         });
-                        setText("Demande envoyée par " +U.getNom()+"  "+U.getPrenom()+"\n" + "Nombre de place demandé " + e.getNBPLACES() + "\n" + "Depart le " + c.getDate());
+                        setText("Demande envoyée par " + U.getNom() + "  " + U.getPrenom() + "\n" + "Nombre de place demandé " + e.getNBPLACES() + "\n" + "Depart le " + c.getDate());
 
                         setFont(Font.font("Berlin Sans FB Demi Bold", 13));
 
@@ -141,10 +135,7 @@ public class FXMLVoirResapprouveController implements Initializable {
         });
         List.setItems(items);
 
-        
     }
-
-    
 
     @FXML
     private void On_btn_Retour(ActionEvent event) {

@@ -28,11 +28,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -41,13 +37,11 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -96,8 +90,8 @@ public class FXMLDemandeCovController implements Initializable {
                         Utilisateur U = new Utilisateur();
                         U = us.getById(e.getID_RESERVE());
                         //    File file = new File(ps.findById(e.getPassager().getId()).getAvatar());
-                        File file = new File("C:\\xampp\\htdocs\\pi\\"+U.getPhoto());
-                        
+                        File file = new File("C:\\xampp\\htdocs\\pi\\" + U.getPhoto());
+
                         Image IMAGE_RUBY = new Image(file.toURI().toString());
                         //   Image IMAGE_RUBY = new Image(ps.findById(e.getPassager().getId()).getAvatar());
 
@@ -142,7 +136,7 @@ public class FXMLDemandeCovController implements Initializable {
                             }
 
                         });
-                        setText("Demande envoyée par " +U.getNom()+"  "+U.getPrenom()+"\n" + "Nombre de place demandé " + e.getNBPLACES() + "\n");
+                        setText("Demande envoyée par " + U.getNom() + "  " + U.getPrenom() + "\n" + "Nombre de place demandé " + e.getNBPLACES() + "\n");
 
                         setFont(Font.font("Berlin Sans FB Demi Bold", 13));
 
@@ -161,19 +155,16 @@ public class FXMLDemandeCovController implements Initializable {
     int nb = 0;
 
     public void redirect(String id) {
-        System.out.println("Interface Affiche Details ");
         System.out.println(id);
         this.id = Integer.parseInt(id);
     }
 
     public void redirect1(String nb) {
-        System.out.println("Interface Affiche Details ");
         System.out.println(nb);
         this.nb = Integer.parseInt(nb);
     }
 
     public void redirect2(String idr) {
-        System.out.println("Interface Affiche Details ");
         System.out.println(idr);
         this.idr = Integer.parseInt(idr);
     }
@@ -195,7 +186,7 @@ public class FXMLDemandeCovController implements Initializable {
             Logger.getLogger(FXMLDetailsCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
         }
         rootpane.getChildren().setAll(pane);
-       
+
         cs.miseajour();
     }
 

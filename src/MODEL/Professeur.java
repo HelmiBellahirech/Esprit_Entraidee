@@ -35,21 +35,22 @@ public class Professeur extends Utilisateur {
         return "Professeur{" + "Specialite=" + Specialite + '}';
     }
 
-    public Professeur(String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Sexe, String Specialite, String Matricule, Boolean Block) {
-        super(Email, username, Password, Nom, Prenom, Telephone, Sexe, Matricule, Block);
+    public Professeur(String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Sexe, String Specialite, String Matricule) {
+        super(Email, username, Password, Nom, Prenom, Telephone, Sexe, Matricule);
         this.Specialite = Specialite;
     }
 
     public Professeur(int ID, String Email, String username, String Password, String Nom, String Prenom,
             String Telephone, String Photo, String Sexe, String Specialite, String Matricule,
-            String Role, Boolean Block) {
-        super(ID, Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Matricule, Role, Block);
+            String Role) {
+        super(ID, Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Matricule, Role);
         this.Specialite = Specialite;
     }
 
-    public Professeur(int ID, String Email, String username, String Password, String Nom, String Prenom,
-            String Telephone, String Photo, String Sexe, String Specialite, String Matricule, String Role) {
-        super(ID, Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Matricule, Role);
+    
+
+    public Professeur( String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Sexe,String Specialite) {
+        super(Email, username, Password, Nom, Prenom, Telephone, Sexe);
         this.Specialite = Specialite;
     }
 
@@ -57,19 +58,16 @@ public class Professeur extends Utilisateur {
         this.Specialite = Specialite;
     }
 
-    public Professeur(String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Photo, String Sexe, String Matricule, String Specialite, Boolean Block) {
-        super(Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Matricule, Block);
+    public Professeur(String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Photo, String Sexe, String Matricule, String Specialite) {
+        super(Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Matricule);
         this.Specialite = Specialite;
     }
 
-    public Professeur(int ID, String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Photo, String Sexe, Date Date_Creation, String Matricule, String Specialite, String Role, int ID_CLUB, Boolean Block) {
-        super(ID, Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Date_Creation, Matricule, Role, ID_CLUB, Block);
+    public Professeur(int ID, String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Photo, String Sexe, Date Date_Creation, String Matricule, String Specialite, String Role) {
+        super(ID, Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, Date_Creation, Matricule, Role);
         this.Specialite = Specialite;
     }
 
-    public Professeur(String Email, String username, String Password, String Nom, String Prenom, String Telephone, String Photo, String Sexe, String Specialite, int ID_CLUB, Boolean Block) {
-        super(Email, username, Password, Nom, Prenom, Telephone, Photo, Sexe, ID_CLUB, Block);
-        this.Specialite = Specialite;
-    }
+  
 
 }

@@ -62,7 +62,7 @@ public class FXMLMesAnnoncesController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficheCollocationController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        rootpane.getChildren().setAll(pane);
+        backgroundPane.getChildren().setAll(pane);
     }
 
     @FXML

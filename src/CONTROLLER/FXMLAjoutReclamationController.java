@@ -484,7 +484,7 @@ public class FXMLAjoutReclamationController implements Initializable {
 
     @FXML
     private void On_btn_Envoyer(ActionEvent event) {
-        Utilisateur u =new Utilisateur();
+       Utilisateur u =new Utilisateur();
         
         final String username ="farahfalleh95@gmail.com"; // mail de la personne qui va envoyer 
 	  final String password ="2248019020711095";// password de la personne qui va envoyer 

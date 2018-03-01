@@ -15,5 +15,5 @@ public interface IutilisateurService extends Iservice<Utilisateur,Integer>{
     public int login(String username, String mdp) ; 
     public Utilisateur getById(Integer id) ; 
      public Utilisateur findbynum(String num);
-      public Utilisateur findUserByMatricule(String Matricule);
+     public Utilisateur findUserByMatricule(String Matricule);
 }

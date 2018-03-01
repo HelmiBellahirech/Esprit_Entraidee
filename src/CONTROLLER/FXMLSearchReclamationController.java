@@ -267,13 +267,8 @@ public class FXMLSearchReclamationController implements Initializable {
             System.out.println("Eveneement Ok ");
             ArrayList<Reclamation> rec = (ArrayList<Reclamation>) sb.rechercher(mot);
             ObservableList<Reclamation> find = FXCollections.observableArrayList(sb.rechercher(mot));
-            //StyledEditorKit.ForegroundAction
-
             List.getItems().clear();
             rec.stream().forEach(System.out::println);
-            for (Reclamation reclamation : find) {
-                System.out.println("***" + reclamation.getDescription());
-            }
             List.setItems(find);
         } else {
             System.out.println("jajkajaka");

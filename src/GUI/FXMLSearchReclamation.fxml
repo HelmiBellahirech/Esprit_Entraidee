@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="rootpane" prefHeight="620.0" prefWidth="1000.0" style="-fx-background-color: DEDCDC;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER.FXMLSearchReclamationController">
+<AnchorPane id="AnchorPane" fx:id="rootpane" prefHeight="639.0" prefWidth="1064.0" style="-fx-background-color: DEDCDC;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER.FXMLSearchReclamationController">
    <children>
       <Label fx:id="searchLabel" layoutX="377.0" layoutY="56.0" text="Search" />
       <JFXListView fx:id="List" layoutX="343.0" layoutY="127.0" prefHeight="412.0" prefWidth="358.0" />

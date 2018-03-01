@@ -9,7 +9,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="rootpane" prefHeight="620.0" prefWidth="1000.0" style="-fx-background-color: DEDCDC;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER.FXMLAjoutReclamationController">
+<AnchorPane id="AnchorPane" fx:id="rootpane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: DEDCDC;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER.FXMLAjoutReclamationController">
    <children>
       <JFXRadioButton fx:id="recobj" layoutX="58.0" layoutY="60.0" text="Reclamation Objet perdu/trouvé">
          <toggleGroup>
@@ -44,9 +44,9 @@
       <Button fx:id="btn_ok" layoutX="526.0" layoutY="443.0" mnemonicParsing="false" onAction="#saveReclamation" style="-fx-background-color: E21C1C; -fx-background-radius: 50px;" text="Publier une annonce" />
       <Label fx:id="photo2Label" layoutX="705.0" layoutY="107.0" text="Photo" />
       <Button fx:id="photo2" layoutX="749.0" layoutY="103.0" mnemonicParsing="false" onAction="#savePhoto2" text="importer photo" />
-      <JFXTextField fx:id="actionStatus2" layoutX="864.0" layoutY="103.0" prefHeight="25.0" prefWidth="98.0" />
+      <JFXTextField fx:id="actionStatus2" layoutX="849.0" layoutY="103.0" prefHeight="25.0" prefWidth="98.0" />
       <JFXTextField fx:id="actionStatus" layoutX="249.0" layoutY="470.0" />
       <Button fx:id="Retour" layoutX="6.0" layoutY="27.0" mnemonicParsing="false" onAction="#On_Btn_Retour" style="-fx-background-radius: 50px;" text="Retour" />
-      <Button fx:id="mail" layoutX="756.0" layoutY="148.0" mnemonicParsing="false" onAction="#On_btn_Envoyer" text="Envoyer Mail" />
+      <Button fx:id="mail" layoutX="773.0" layoutY="148.0" mnemonicParsing="false" onAction="#On_btn_Envoyer" text="Envoyer Mail" />
    </children>
 </AnchorPane>

@@ -199,7 +199,7 @@ public class FXMLChercherAllController implements Initializable {
            ObservableList<Colocation> items = FXCollections.observableArrayList(colocations);
         System.out.println(colocations);
         items.clear();
-        listv.getItems().clear();
+//        listv.getItems().clear();
         prixMin.setText("");
         prixMax.setText("");
         colocations.forEach(e -> {

@@ -28,7 +28,7 @@ public class Reclamation {
    private String photo;
    private String photo2;
    
-       public Reclamation(int id, String description, Date date_decouverte, String lieu_decouverte, String typeobj_perdu, String type, String autretypeobj_perdu, String localisation, String autrelocalisation, String etage, String matricule, String salle, String photo, String photo2) {
+   public Reclamation(int id, String description, Date date_decouverte, String lieu_decouverte, String typeobj_perdu, String type, String autretypeobj_perdu, String localisation, String autrelocalisation, String etage, String matricule, String salle, String photo, String photo2) {
         this.id = id;
         this.description = description;
         this.date_decouverte = date_decouverte;

@@ -6,7 +6,6 @@
 package CONTROLLER;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -17,7 +16,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -27,8 +25,6 @@ import javafx.scene.layout.AnchorPane;
  * @author OrbitG
  */
 public class FXMLAfficheCovoiturageController implements Initializable {
-
-    
 
     @FXML
     private ImageView img11;
@@ -55,40 +51,39 @@ public class FXMLAfficheCovoiturageController implements Initializable {
 
     @FXML
     private void On_btn_Rechercher(ActionEvent event) throws IOException {
-        Depart=DepartInput.getText(); 
-        Arrive=ArriveInput.getText(); 
+        Depart = DepartInput.getText();
+        Arrive = ArriveInput.getText();
         AnchorPane pane = new AnchorPane();
-                                    try {
-                                        pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLTajriba.fxml"));
-                                    } catch (IOException ex) {
-                                        Logger.getLogger(FXMLDetailsCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
-                                    rootpane.getChildren().setAll(pane);
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLTajriba.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDetailsCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        rootpane.getChildren().setAll(pane);
 
     }
 
     @FXML
     private void On_btn_Ajouter(ActionEvent event) throws IOException {
-         AnchorPane pane = new AnchorPane();
-                                    try {
-                                        pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLAjoutCovoiturage.fxml"));
-                                    } catch (IOException ex) {
-                                        Logger.getLogger(FXMLAjoutCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
-                                    rootpane.getChildren().setAll(pane);
+        AnchorPane pane = new AnchorPane();
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLAjoutCovoiturage.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLAjoutCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        rootpane.getChildren().setAll(pane);
 
     }
 
     @FXML
     private void On_btn_Menu(ActionEvent event) {
         AnchorPane pane = new AnchorPane();
-            try {
-                                        pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLAcceuilUtilisateur.fxml"));
-                                    } catch (IOException ex) {
-                                        Logger.getLogger(FXMLAjoutCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
-                                    rootpane.getChildren().setAll(pane);
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLAcceuilUtilisateur.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLAjoutCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        rootpane.getChildren().setAll(pane);
     }
 
-   
 }
