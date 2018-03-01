@@ -31,7 +31,7 @@
                 </Pane>
             </children>
         </Pane>
-        <GridPane layoutX="139.0" layoutY="111.0" opacity="0.8" prefHeight="640.0" prefWidth="718.0" AnchorPane.topAnchor="80.0">
+        <GridPane layoutX="139.0" layoutY="111.0" opacity="0.8" prefHeight="541.0" prefWidth="718.0" AnchorPane.topAnchor="80.0">
             <children>
                 <Pane id="hhh" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #807B7B;" stylesheets="@../CSS/StyleSheet.css">
                     <children>
@@ -158,7 +158,7 @@
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F24D53;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <children>
-                        <JFXButton id="btn" alignment="BOTTOM_CENTER" onAction="#On_btn_Cours" prefHeight="161.0" prefWidth="239.0" stylesheets="@../CSS/StyleSheet.css" text="Cours" textFill="WHITE">
+                        <JFXButton id="btn" alignment="BOTTOM_CENTER" onAction="#On_btn_Revision" prefHeight="161.0" prefWidth="239.0" stylesheets="@../CSS/StyleSheet.css" text="Revision" textFill="WHITE">
                             <font>
                                 <Font size="19.0" />
                             </font>
@@ -185,23 +185,6 @@
                         </JFXButton>
                     </children>
                 </Pane>
-                <Pane layoutX="250.0" layoutY="330.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F24D53;" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                    <children>
-                        <JFXButton id="btn" alignment="BOTTOM_CENTER" onAction="#On_btn_ReservSalle" prefHeight="161.0" prefWidth="239.0" stylesheets="@../CSS/StyleSheet.css" text="Réservation salle" textFill="WHITE">
-                            <font>
-                                <Font size="19.0" />
-                            </font>
-                            <padding>
-                                <Insets bottom="20.0" />
-                            </padding>
-                        </JFXButton>
-                        <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="104.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@NaturopathicMedi.png" />
-                            </image>
-                        </ImageView>
-                    </children>
-                </Pane>
             </children>
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -211,7 +194,6 @@
             <rowConstraints>
                 <RowConstraints maxHeight="181.0" minHeight="10.0" prefHeight="159.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="165.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="167.0" minHeight="10.0" prefHeight="161.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="167.0" minHeight="10.0" prefHeight="161.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>

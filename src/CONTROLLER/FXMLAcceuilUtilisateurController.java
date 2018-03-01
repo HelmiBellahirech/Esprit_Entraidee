@@ -173,17 +173,6 @@ public class FXMLAcceuilUtilisateurController implements Initializable {
     }
 
     @FXML
-    private void On_btn_Cours(ActionEvent event) {
-        AnchorPane pane = new AnchorPane();
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLCours.fxml"));
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLAfficheCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        rootpane.getChildren().setAll(pane);
-    }
-
-    @FXML
     private void On_btn_Reclamation(ActionEvent event) {
         AnchorPane pane = new AnchorPane();
         try {
@@ -204,17 +193,6 @@ public class FXMLAcceuilUtilisateurController implements Initializable {
         }
         rootpane.getChildren().setAll(pane);
 
-    }
-
-    @FXML
-    private void On_btn_ReservSalle(ActionEvent event) {
-        AnchorPane pane = new AnchorPane();
-        try {
-            pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLReservationSalle.fxml"));
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLDetailsCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        rootpane.getChildren().setAll(pane);
     }
 
     @FXML
@@ -269,6 +247,17 @@ public class FXMLAcceuilUtilisateurController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(FXMLDetailsCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        rootpane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void On_btn_Revision(ActionEvent event) {
+        AnchorPane pane = new AnchorPane();
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLRevision.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDetailsCovoiturageController.class.getName()).log(Level.SEVERE, null, ex);
+        }        
         rootpane.getChildren().setAll(pane);
     }
 }
