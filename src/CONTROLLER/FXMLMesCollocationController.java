@@ -9,14 +9,18 @@ import MODEL.Colocation;
 import MODEL.Covoiturage;
 import SERVICE.Colocation_service;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,7 +91,8 @@ public class FXMLMesCollocationController implements Initializable {
             }
               
         });
-        List.setItems(items);
+          List.setItems(items);
+      
     }    
     
 }

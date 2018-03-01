@@ -3,18 +3,37 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane id="AnchorPane" fx:id="pane2" prefHeight="620.0" prefWidth="1000.0" style="-fx-background-color: #DEDCDCC1C;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER.FXMLChercherAllController">
    <children>
-      <JFXTextField layoutX="123.0" layoutY="45.0" prefHeight="31.0" prefWidth="135.0" text="Type de logement :" />
-      <JFXTextField layoutX="490.0" layoutY="45.0" prefHeight="31.0" prefWidth="89.0" text="Prix Max :" />
-      <JFXTextField layoutX="490.0" layoutY="96.0" prefHeight="31.0" prefWidth="89.0" text="Prix Min :" />
-      <JFXTextField id="nbChambre" fx:id="prixMax" layoutX="613.0" layoutY="45.0" />
-      <JFXTextField id="nbChambre" fx:id="prixMin" layoutX="613.0" layoutY="96.0" />
-      <JFXButton fx:id="chercherA" layoutX="873.0" layoutY="53.0" onAction="#chercher_A" style="-fx-background-color: orange;" text="RECHERCHE" />
+      <JFXButton fx:id="chercherA" layoutX="877.0" layoutY="42.0" onAction="#chercher_A" style="-fx-background-color: #E21C1C;" text="RECHERCHE" />
       <JFXListView fx:id="listv" layoutX="95.0" layoutY="148.0" prefHeight="450.0" prefWidth="867.0" style="-fx-background-color: #DEDCDC;" />
       <JFXButton fx:id="retour" layoutX="8.0" layoutY="14.0" onAction="#but_retour" style="-fx-background-radius: 30px; -fx-background-color: #E21C1C;" text="Retour" />
-      <JFXTextField fx:id="type_log1" layoutX="272.0" layoutY="45.0" />
+      <ComboBox fx:id="type_log1" layoutX="217.0" layoutY="42.0" prefHeight="31.0" prefWidth="135.0" />
+      <JFXTextField fx:id="type_log2" layoutX="217.0" layoutY="42.0" prefHeight="31.0" prefWidth="135.0" />
+      <VBox fx:id="vbox1" layoutX="581.0" layoutY="42.0" prefHeight="84.0" prefWidth="100.0">
+         <children>
+            <JFXTextField prefHeight="31.0" prefWidth="89.0" text="Prix Max :" />
+            <JFXTextField prefHeight="31.0" prefWidth="89.0" text="Prix Min :" />
+         </children>
+      </VBox>
+      <VBox fx:id="vbox2" layoutX="698.0" layoutY="42.0" prefHeight="84.0" prefWidth="154.0">
+         <children>
+            <JFXTextField id="nbChambre" fx:id="prixMax" />
+            <JFXTextField id="nbChambre" fx:id="prixMin" prefHeight="0.0" prefWidth="174.0" />
+         </children>
+      </VBox>
+      <RadioButton fx:id="radioC" layoutX="84.0" layoutY="46.0" mnemonicParsing="false" onAction="#radio_actionC" text="Chercher">
+         <toggleGroup>
+            <ToggleGroup fx:id="tog" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="radioP" layoutX="445.0" layoutY="47.0" mnemonicParsing="false" onAction="#radio_actionP" text="Prix" toggleGroup="$tog" />
+      <JFXTextField fx:id="typ_lo" layoutX="66.0" layoutY="41.0" prefHeight="31.0" prefWidth="135.0" text="Type de logement" />
    </children>
 </AnchorPane>

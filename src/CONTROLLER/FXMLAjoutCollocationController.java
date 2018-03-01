@@ -7,6 +7,7 @@ package CONTROLLER;
 
 import MODEL.Colocation;
 import SERVICE.Colocation_service;
+import UTILS.InputValidation;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -66,7 +67,7 @@ import javax.imageio.ImageIO;
  *
  * @author LENOVO
  */
-public class FXMLAjoutCollocationController implements Initializable, MapComponentInitializedListener, DirectionsServiceCallback{
+public class FXMLAjoutCollocationController implements Initializable{
 
     @FXML
     private AnchorPane panne;
@@ -97,10 +98,6 @@ public class FXMLAjoutCollocationController implements Initializable, MapCompone
     @FXML
     private JFXButton idm;
     @FXML
-    private GoogleMapView mapView;
-    @FXML
-    private VBox notic;
-    @FXML
     private JFXRadioButton meuble1;
     @FXML
     private JFXRadioButton meuble2;
@@ -110,10 +107,7 @@ public class FXMLAjoutCollocationController implements Initializable, MapCompone
     @FXML
     private TextField photoI;
     
-      protected DirectionsService directionsService;
-    protected DirectionsPane directionsPane;
-    protected String from=" Z.I. Chotrana II B.P. 160، Pôle Technologique El Ghazela Ariana 2088";
-    protected StringProperty to = new SimpleStringProperty();
+
 
     
     /**
@@ -132,17 +126,16 @@ public class FXMLAjoutCollocationController implements Initializable, MapCompone
       type_log.getItems().add("chambre");
       type_log.getItems().add("Maison");
       date_dispo.setValue(LocalDate.now());
+      
       nbPersonne.addEventFilter(KeyEvent.KEY_TYPED , numeric_Validation(10));
       adresse.addEventFilter(KeyEvent.KEY_TYPED , letter_Validation(50));
       nbChambre.addEventFilter(KeyEvent.KEY_TYPED , numeric_Validation(10));
       titre.addEventFilter(KeyEvent.KEY_TYPED , letter_Validation(50));
-      prix.addEventFilter(KeyEvent.KEY_TYPED , numeric_Validation(10)); // TODO
-      
-       mapView.addMapInializedListener(this);
-        to.bindBidirectional(adresse.textProperty());
+      prix.addEventFilter(KeyEvent.KEY_TYPED , numeric_Validation(10));
+     
     }    
 
-     /* Numeric Validation Limit the  characters to maxLengh AND to ONLY DigitS *************************************/
+     /*limitter la validation des nombres :maxLengh et  seulement des nombres *************************************/
     public EventHandler<KeyEvent> numeric_Validation(final Integer max_Lengh) {
     return new EventHandler<KeyEvent>() {
         @Override
@@ -165,7 +158,7 @@ public class FXMLAjoutCollocationController implements Initializable, MapCompone
 }    
 
 
- /* Letters Validation Limit the  characters to maxLengh AND to ONLY Letters *************************************/
+ /*limitter la validation des lettres :maxLengh et  seulement des Letters de  Validation *************************************/
         public EventHandler<KeyEvent> letter_Validation(final Integer max_Lengh) {
             return new EventHandler<KeyEvent>() {
         @Override
@@ -187,9 +180,14 @@ public class FXMLAjoutCollocationController implements Initializable, MapCompone
     @FXML
     private void Saveannonce(ActionEvent event) {
          String Meuble = "";
+        Date date;
         String NbChambre = nbChambre.getText() ; 
         String NbPersonne = nbPersonne.getText();
-        LocalDate  Date_dispo = date_dispo.getValue() ; 
+         if (date_dispo.getValue() != null) {
+            date = java.sql.Date.valueOf(date_dispo.getValue());
+        } else {
+            date = null;
+        }
         String Prix = prix.getText();
         String Type_log = type_log.getValue();
         String Adresse = adresse.getText();
@@ -200,25 +198,54 @@ public class FXMLAjoutCollocationController implements Initializable, MapCompone
         if (meuble2.isSelected()) {
             Meuble = meuble2.getText();
         }
+        
         String Titre = titre.getText();
         String Photo = photoI.getText();
-        Colocation c= new Colocation(Integer.parseInt(NbChambre),Integer.parseInt(NbPersonne),Type_log,Adresse,Etage,Date.valueOf(Date_dispo),Meuble,Float.parseFloat(Prix),Titre,Photo) ; 
+        java.util.Date date_util = new java.util.Date();
+        java.sql.Date date_sql = new java.sql.Date(date_util.getTime());
+        
+      if ((!"".equals(Titre)) && (!"".equals(Etage))  && (!"".equals(Adresse)) && (!"".equals(NbChambre)) && (!"".equals(NbPersonne))&& (!"".equals(Photo))&& (!"".equals(Prix))&& (!"".equals(Type_log))) {
+             if (date.compareTo(date_sql) < 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Echec de l'ajout");
+                alert.setHeaderText(null);
+                alert.setContentText("Attention ! Date invalide !");
+                alert.showAndWait();
+                } 
+             else{
+
+        Colocation c= new Colocation(Integer.parseInt(NbChambre),Integer.parseInt(NbPersonne),Type_log,Adresse,Etage,date,Meuble,Float.parseFloat(Prix),Titre,Photo) ; 
         Colocation_service ser = new Colocation_service() ; 
         ser.add(c);
-        
-        if(adresse.getText().trim().isEmpty()  ){
-        Alert fail= new Alert(Alert.AlertType.INFORMATION);
-        fail.setHeaderText("Echec de l'ajout");
-        fail.setContentText("Attention ! Veuillez remplir tous les champs ");
-        fail.showAndWait();
-        } else {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText("Succés");
-        alert.setContentText("Ajout avec succés!");
-        alert.showAndWait();
-    }
-    }   
+         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Ajout Annonce");
+                alert.setHeaderText(null);
+                alert.setContentText("Votre Annonce à ete ajouté !");
 
+                alert.showAndWait();
+                AnchorPane pane = new AnchorPane();
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/GUI/FXMLAfficheCollocation.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLAjoutCollocationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        panne.getChildren().setAll(pane);
+            }
+
+     
+             }   
+      else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Echec de l'ajout");
+            alert.setHeaderText(null);
+            alert.setContentText("Attention ! Veuillez remplir tous les champs ");
+
+            alert.showAndWait();
+        }
+         
+    }
+    
+    
     @FXML
     private void loadimage(ActionEvent event) {
          FileChooser fileChooser = new FileChooser();
@@ -229,7 +256,7 @@ public class FXMLAjoutCollocationController implements Initializable, MapCompone
             FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
             FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
             fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-            photoI.setText(file.getName());
+            photoI.setText(file.  getName());
             System.out.println(file.getName()); 
             
            
@@ -257,45 +284,10 @@ public class FXMLAjoutCollocationController implements Initializable, MapCompone
         }
         panne.getChildren().setAll(pane);
     }
- @Override
-    public void directionsReceived(DirectionsResult results, DirectionStatus status) {
-    }
-    private static final double latitude = 36.898392;
-    private static final double longitude = 10.189732000000049;
 
+ 
 
-    @Override
-    public void mapInitialized() {
-        MapOptions options = new MapOptions();
-        MarkerOptions markerOptions = new MarkerOptions();
-        LatLong markerLatLong = new LatLong(latitude, longitude);
-        markerOptions.position(markerLatLong)
-                .title("My new Marker")
-                .animation(Animation.DROP)
-                .visible(true);
-      Marker myMarker = new Marker(markerOptions);
-
-        options.center(new LatLong(36.8189700, 10.1657900))
-                .zoomControl(true)
-                .zoom(8)
-                .overviewMapControl(false)
-                .mapType(MapTypeIdEnum.ROADMAP);
-        GoogleMap map = mapView.createMap(options);
-        directionsService = new DirectionsService();
-        directionsPane = mapView.getDirec();
-        map.addMarker(myMarker);
-          InfoWindowOptions infoOptions = new InfoWindowOptions();
-        infoOptions.content("<h2>ESPRIT:Pôle Technologique El Ghazela، Ariana 2088</h2>");
-                
-        InfoWindow window = new InfoWindow(infoOptions);
-             window.open(map, myMarker);
-    }
-
-    @FXML
-    private void monaction(ActionEvent event) {
-         DirectionsRequest request = new DirectionsRequest(from, to.get(), TravelModes.DRIVING);
-        directionsService.getRoute(request, this, new DirectionsRenderer(true, mapView.getMap(), directionsPane));
-    }
+  
 
    
 }

@@ -8,6 +8,7 @@ package CONTROLLER;
 import MODEL.Reclamation;
 import MODEL.Utilisateur;
 import SERVICE.ReclamationService;
+import SERVICE.UtilisateurService;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -483,10 +484,10 @@ public class FXMLAjoutReclamationController implements Initializable {
 
     @FXML
     private void On_btn_Envoyer(ActionEvent event) {
-        Utilisateur u =new Utilisateur();
+       Utilisateur u =new Utilisateur();
         
-        final String username ="farah.falleh@esprit.tn"; // mail de la personne qui va envoyer 
-	  final String password ="farouhactt17R";// password de la personne qui va envoyer 
+        final String username ="farahfalleh95@gmail.com"; // mail de la personne qui va envoyer 
+	  final String password ="2248019020711095";// password de la personne qui va envoyer 
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -502,15 +503,15 @@ public class FXMLAjoutReclamationController implements Initializable {
 		  });
 
 		try {
-                        ReclamationService rs=new ReclamationService();
+                        UtilisateurService rs=new UtilisateurService();
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("farah.falleh@esprit.tn")); // same email id
+			message.setFrom(new InternetAddress("farahfalleh95@gmail.com")); // same email id
 			message.setRecipients(Message.RecipientType.TO,
                                 //////////
 				InternetAddress.parse(rs.findUserByMatricule(matricule.getText()).getEmail()));// mail de la personne qui va recevoir le mail
 			message.setSubject("VOITURE MAL STATIONNEE");
 			message.setText("Merci de venir déplacer votre voiture,"
-				+ "\n\n Voiture mal garée !");
+				+ "\n\n Voiture mal garée ! \n"+"Recalamation envoyée par Mr/Mme "+esprit_entraide.Esprit_Entraide.getInstance().getLoggedUser().getNom()+" "+esprit_entraide.Esprit_Entraide.getInstance().getLoggedUser().getPrenom());
 
 			Transport.send(message);
 

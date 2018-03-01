@@ -45,17 +45,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -82,7 +87,7 @@ public class FXMLChercherAllController implements Initializable {
     private JFXListView<Colocation> listv;
   
     @FXML
-    private JFXTextField type_log1;
+    private ComboBox<String> type_log1;
     @FXML
     private JFXButton retour;
     @FXML
@@ -90,6 +95,20 @@ public class FXMLChercherAllController implements Initializable {
     String adresse = FXMLAfficheCollocationController.Adresse;
     List<Colocation> colocations = new ArrayList<>() ; 
     Colocation_service col = new Colocation_service();
+    @FXML
+    private JFXTextField type_log2;
+    @FXML
+    private VBox vbox1;
+    @FXML
+    private VBox vbox2;
+    @FXML
+    private RadioButton radioC;
+    @FXML
+    private RadioButton radioP;
+    @FXML
+    private JFXTextField typ_lo;
+    @FXML
+    private ToggleGroup tog;
 
      
 
@@ -99,16 +118,44 @@ public class FXMLChercherAllController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+      type_log1.getItems().add("Studio");
+      type_log1.getItems().add("Appartement");
+      type_log1.getItems().add("chambre");
+      type_log1.getItems().add("Maison");
+      
+      prixMin.addEventFilter(KeyEvent.KEY_TYPED , numeric_Validation(10));
+      prixMax.addEventFilter(KeyEvent.KEY_TYPED , numeric_Validation(10));
+      type_log2.addEventFilter(KeyEvent.KEY_TYPED , letter_Validation(50));
+   
         if(adresse.equals(""))
         {
-            colocations = col.getAll();
+           colocations = col.getAll();
+           type_log1.setVisible(false);
+           vbox1.setVisible(false);
+           vbox2.setVisible(false);
+           chercherA.setVisible(false);
+           typ_lo.setVisible(false);
+           type_log2.setVisible(false);
+
         }
-       
         if(!adresse.equals(""))
-        {colocations=col.findByAdresse(adresse) ; }
+        {
+            colocations = new Colocation_service().getAll().stream()
+                .filter(s -> s.getAdresse().contains(CharSequence.class.cast(adresse)))
+                .collect(Collectors.toList());
+         
+            type_log2.setVisible(false);
+            typ_lo.setVisible(false);
+            radioC.setVisible(false);
+            radioP.setVisible(false);
+            typ_lo.setVisible(true);
+
+            
+        }
         
-        ObservableList<Colocation> items = FXCollections.observableArrayList(colocations);
-        listv.setCellFactory(new Callback<ListView<Colocation>, ListCell<Colocation>>(){
+      
+         ObservableList<Colocation> items = FXCollections.observableArrayList(colocations);
+            listv.setCellFactory(new Callback<ListView<Colocation>, ListCell<Colocation>>(){
  
             @Override
             public ListCell<Colocation> call(ListView<Colocation> p) {
@@ -139,21 +186,25 @@ public class FXMLChercherAllController implements Initializable {
                             }
 
                         });
-                            setText( t.getTitre() +"\n"+"prix :"+t.getPrix()+ "\n"+"Disponible Ã  parir de :"+t.getDate_dispo()+ "\n"+"Type de logement:"+t.getType_log());
+                            setText( t.getTitre() +"\n"+"prix :"+t.getPrix()+ "\n"+"Disponible à  parir de :"+t.getDate_dispo()+ "\n"+"Type de logement:"+t.getType_log());
                         }
+                         
                     }
+                    
  
                 };
+                
                  
                 return cell;
                 
             }
+            
               
         });
         listv.setItems(items);
         FilteredList<Colocation> filteredData = new  FilteredList<>(items, e -> true);
-         type_log1.setOnKeyReleased( e ->{
-         type_log1.textProperty().addListener((observable, oldValue, newValue) -> {
+         type_log2.setOnKeyReleased( e ->{
+         type_log2.textProperty().addListener((observable, oldValue, newValue) -> {
              filteredData.setPredicate((Predicate<? super Colocation>) colocation -> {
                if (newValue == null || newValue.isEmpty()){
                      return true;
@@ -161,18 +212,27 @@ public class FXMLChercherAllController implements Initializable {
                 String lowerCaseFilter = newValue.toLowerCase();
                if (colocation.getType_log().toLowerCase().contains(CharSequence.class.cast(lowerCaseFilter))){
                      return true;
-                 }         
+                 }
+               if(colocation.getTitre().toLowerCase().contains(CharSequence.class.cast(lowerCaseFilter))){
+                   return true;
+               }
+             
                  return false;
                  
              });
          });
          SortedList<Colocation> sortedData = new SortedList<>(filteredData);
-         //sortedData.comparatorProperty().bind(listv.comparatorProperty());
           listv.setItems(sortedData);
+         
             
         });
+        
+        
+
      
 }
+   
+  
     
     @FXML
     private void chercher_A(ActionEvent event) {
@@ -185,21 +245,22 @@ public class FXMLChercherAllController implements Initializable {
         if(adresse.equals(""))
         {
             colocations = new Colocation_service().getAll().stream()
-             
+               
                 .filter(s -> s.getPrix() >= Integer.parseInt(prixMin.getText()))
                 .filter(s -> s.getPrix() <= Integer.parseInt(prixMax.getText()))
                 .collect(Collectors.toList());
         }
                 if(!adresse.equals(""))
         {colocations = new Colocation_service().getAll().stream()
-                .filter(s -> s.getAdresse().equals(adresse))
+                .filter(s -> s.getAdresse().contains(CharSequence.class.cast(adresse)))
+                .filter(s -> s.getType_log().contains(CharSequence.class.cast(type_log1.getValue())))
                 .filter(s -> s.getPrix() >= Integer.parseInt(prixMin.getText()))
                 .filter(s -> s.getPrix() <= Integer.parseInt(prixMax.getText()))
-                .collect(Collectors.toList()); }
+                .collect(Collectors.toList());
+        }
            ObservableList<Colocation> items = FXCollections.observableArrayList(colocations);
         System.out.println(colocations);
         items.clear();
-        listv.getItems().clear();
         prixMin.setText("");
         prixMax.setText("");
         colocations.forEach(e -> {
@@ -207,7 +268,7 @@ public class FXMLChercherAllController implements Initializable {
             System.out.println(e);
         });
                    
- listv.setCellFactory(new Callback<ListView<Colocation>, ListCell<Colocation>>(){
+     listv.setCellFactory(new Callback<ListView<Colocation>, ListCell<Colocation>>(){
  
             @Override
             public ListCell<Colocation> call(ListView<Colocation> p) {
@@ -238,7 +299,7 @@ public class FXMLChercherAllController implements Initializable {
                             }
 
                         });
-                            setText( t.getTitre() +"\n"+"prix :"+t.getPrix()+ "\n"+"Disponible Ã  parir de :"+t.getDate_dispo()+ "\n"+"Type de logement:"+t.getType_log());
+                            setText( t.getTitre() +"\n"+"prix :"+t.getPrix()+ "\n"+"Disponible à  parir de :"+t.getDate_dispo()+ "\n"+"Type de logement:"+t.getType_log());
                         }
                     }
  
@@ -250,28 +311,7 @@ public class FXMLChercherAllController implements Initializable {
               
         });
         listv.setItems(items);
-            listv.setItems(items);
-        FilteredList<Colocation> filteredData = new  FilteredList<>(items, e -> true);
-         type_log1.setOnKeyReleased( e ->{
-         type_log1.textProperty().addListener((observable, oldValue, newValue) -> {
-             filteredData.setPredicate((Predicate<? super Colocation>) colocation -> {
-               if (newValue == null || newValue.isEmpty()){
-                     return true;
-                 }
-                String lowerCaseFilter = newValue.toLowerCase();
-               if (colocation.getType_log().toLowerCase().contains(CharSequence.class.cast(lowerCaseFilter))){
-                     return true;
-                 }         
-                 return false;
-                 
-             });
-         });
-         SortedList<Colocation> sortedData = new SortedList<>(filteredData);
-         //sortedData.comparatorProperty().bind(listv.comparatorProperty());
-          listv.setItems(sortedData);
             
-        });
-     
         
     }
 
@@ -286,7 +326,67 @@ public class FXMLChercherAllController implements Initializable {
         }
         pane2.getChildren().setAll(pane);
     }
-        
+
+   
+   
+    /*limitter la validation des nombres :maxLengh et  seulement des nombres *************************************/
+
+    public EventHandler<KeyEvent> numeric_Validation(final Integer max_Lengh) {
+    return new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent e) {
+            TextField txt_TextField = (TextField) e.getSource();                
+            if (txt_TextField.getText().length() >= max_Lengh) {                    
+                e.consume();
+            }
+            if(e.getCharacter().matches("[0-9.]")){ 
+                if(txt_TextField.getText().contains(CharSequence.class.cast(".")) && e.getCharacter().matches("[.]")){
+                    e.consume();
+                }else if(txt_TextField.getText().length() == 0 && e.getCharacter().matches("[.]")){
+                    e.consume(); 
+                }
+            }else{
+                e.consume();
+            }
+        }
+    };
+}    
+
+
+ /*limitter la validation des lettres :maxLengh et  seulement des Letters de  Validation *************************************/
+        public EventHandler<KeyEvent> letter_Validation(final Integer max_Lengh) {
+            return new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent e) {
+            TextField txt_TextField = (TextField) e.getSource();                
+            if (txt_TextField.getText().length() >= max_Lengh) {                    
+                e.consume();
+            }
+            if(e.getCharacter().matches("[A-Z a-z]")){ 
+            }else{
+                e.consume();
+            }
+        }
+    };
+} 
+
+    @FXML
+    private void radio_actionC(ActionEvent event) {
+        vbox1.setVisible(false);
+         vbox2.setVisible(false);
+         chercherA.setVisible(false);
+        type_log2.setVisible(true);
+    }
+
+    @FXML
+    private void radio_actionP(ActionEvent event) {
+         type_log2.setVisible(false);
+         typ_lo.setVisible(false);
+         vbox1.setVisible(true);
+         vbox2.setVisible(true);
+         chercherA.setVisible(true);
+    }
+
 
 
    

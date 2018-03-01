@@ -246,5 +246,24 @@ public class ReclamationService implements IreclamationService{
             ex.printStackTrace();
         }
         return reclamations;}
+     public List<Reclamation> findByType(String x) {
+        Reclamation reclamation = null;
+        List<Reclamation> reclamations = new ArrayList<>();
+        String req = "select * from reclamation where type=?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(req);
+            preparedStatement.setString(1,x);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                reclamation = new Reclamation(resultSet.getInt("id"), resultSet.getString("description"), resultSet.getDate("date_decouverte"), resultSet.getString("lieu_decouverte"), resultSet.getString("typeobj_perdu"), resultSet.getString("type"), resultSet.getString("autretypeobj_perdu"), resultSet.getString("localisation"), resultSet.getString("autrelocalisation"), resultSet.getString("etage"), resultSet.getString("matricule"), resultSet.getString("salle"), resultSet.getString("photo"), resultSet.getString("photo2"));
+                reclamations.add(reclamation);
+                System.out.println("makni");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return reclamations;
+    }
 }
 

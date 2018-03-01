@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/LENOVO/Documents/NetBeansProjects/Esprit_Entraidee/Esprit_Entraidee/src/CONTROLLER/FXMLTajribaController.java</file>
-            <file>file:/C:/Users/LENOVO/Documents/NetBeansProjects/Esprit_Entraidee/Esprit_Entraidee/src/CONTROLLER/FXMLAcceuilUtilisateurController.java</file>
-            <file>file:/C:/Users/LENOVO/Documents/NetBeansProjects/Esprit_Entraidee/Esprit_Entraidee/src/SERVICE/Covoiturage_service.java</file>
-            <file>file:/C:/Users/LENOVO/Documents/NetBeansProjects/Esprit_Entraidee/Esprit_Entraidee/src/SERVICE/Colocation_service.java</file>
-            <file>file:/C:/Users/LENOVO/Documents/NetBeansProjects/Esprit_Entraidee/Esprit_Entraidee/src/GUI/FXMLMesAnnonces.fxml</file>
-            <file>file:/C:/Users/LENOVO/Documents/NetBeansProjects/Esprit_Entraidee/Esprit_Entraidee/src/CONTROLLER/FXMLMesAnnoncesController.java</file>
+            <file>file:/C:/Users/LENOVO/Documents/NetBeansProjects/Esprit_Entraidee/Esprit_Entraidee/src/CONTROLLER/FXMLAjoutCovoiturageController.java</file>
+            <file>file:/C:/Users/LENOVO/Documents/NetBeansProjects/Esprit_Entraidee/Esprit_Entraidee/src/CONTROLLER/FXMLAjoutCollocationController.java</file>
         </group>
     </open-files>
 </project-private>
