@@ -35,7 +35,7 @@ public class SalleService implements ISalleService {
 
         PreparedStatement preparedStatement;
         try {
-            preparedStatement = connection.prepareStatement(req);
+            preparedStatement = connection.prepareStatement(req);            
             preparedStatement.setInt(1, rvSalle.getSalle().getId());
             preparedStatement.setInt(2, rvSalle.getUser().getID());
             preparedStatement.setTimestamp(3, Timestamp.valueOf(rvSalle.getDateTime1()));
@@ -82,7 +82,7 @@ public class SalleService implements ISalleService {
             preparedStatement = connection.prepareStatement(req);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                salle = new Salle(resultSet.getInt("num_salle"), resultSet.getInt("num_bloc"), resultSet.getInt("nbr_chaise"), resultSet.getInt("nbr_table"));
+                salle = new Salle(resultSet.getInt("id"), resultSet.getInt("num_salle"), resultSet.getInt("num_bloc"), resultSet.getInt("nbr_chaise"), resultSet.getInt("nbr_table"));
                 salleList.add(salle);
             }
         } catch (SQLException ex) {
@@ -93,10 +93,11 @@ public class SalleService implements ISalleService {
 
     @Override
     public boolean salleDisponible(ReservationSalle rvSalle) {
-        String query = "SELECT COUNT(*) as count FROM reservation_salle WHERE salle_id = ? AND (datetime_start >= ? AND datetime_start <= ?)"
-                + " OR (datetime_end >= ? AND datetime_end <= ?)";
+        String query = "SELECT COUNT(*) as count FROM reservation_salle WHERE salle_id = ? AND ((datetime_start >= ? AND datetime_start <= ?)"
+                + " OR (datetime_end >= ? AND datetime_end <= ?))";
         PreparedStatement preparedStatement;
         try {
+            System.out.println(rvSalle.getSalle().getId());
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, rvSalle.getSalle().getId());
             preparedStatement.setTimestamp(2, Timestamp.valueOf(rvSalle.getDateTime1()));

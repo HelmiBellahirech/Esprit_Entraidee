@@ -9,13 +9,13 @@ package MODEL;
  *
  * @author nadaghanem
  */
-public class Salle
-{
+public class Salle {
+
     private int id;
-    private  int num_salle;
-    private  int num_bloc;
-    private  int nbr_chaise;
-    private int nbr_table ; 
+    private int num_salle;
+    private int num_bloc;
+    private int nbr_chaise;
+    private int nbr_table;
 
     public Salle(int num_salle, int num_bloc, int nbr_chaise, int nbr_table) {
         this.num_salle = num_salle;
@@ -72,11 +72,8 @@ public class Salle
         this.nbr_table = nbr_table;
     }
 
-  
-    
-    
-    
-    
-    
-    
+    @Override
+    public String toString() {
+        return num_salle + "- Block " + num_bloc;
+    }
 }
